@@ -41,6 +41,15 @@ void lookup(node_t* top)
     }
 }
 
+int peek(node_t* top)
+{   
+    if (top == NULL) {
+        printf("Stack is empty\n");
+        return;
+    }
+    return top->data;
+}
+
 int main(void)
 {   
     node_t* top = NULL;
@@ -48,7 +57,7 @@ int main(void)
     int n;
     while(1) 
     {
-        printf("\nPrint 1 to push, 2 to pop, 3 to print the whole stack, 4 to exit\n");
+        printf("\nPrint 1 to push, 2 to pop, 3 to print the whole stack, 4 to peek, 5 to exit\n");
         scanf("%d", &query);
         if (query == 1) {
             printf("to push: ");
@@ -58,6 +67,8 @@ int main(void)
             top = pop(top);
         } else if (query == 3) {
             lookup(top);
+        } else if (query == 4) {
+            printf("First element: %d", peek(top));
         } else {
             break;
         }
