@@ -45,7 +45,7 @@ int peek(node_t* top)
 {   
     if (top == NULL) {
         printf("Stack is empty\n");
-        return;
+        return -1;
     }
     return top->data;
 }
@@ -68,7 +68,11 @@ int main(void)
         } else if (query == 3) {
             lookup(top);
         } else if (query == 4) {
-            printf("First element: %d", peek(top));
+           int n = peek(top);
+           if (n != -1)
+           {
+            printf("First element: %d", n);
+           }
         } else {
             break;
         }
