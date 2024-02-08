@@ -1,21 +1,21 @@
 #include <stdio.h>
 
-void quickSort(int *arr, int first, int last)
+void quickSort(int *arr, int start, int end)
 {   
-    if (last <= first)
+    if (end <= start)
     {
         return;
     }
-    int left = first;
-    int right = last;
-    int middle = arr[(left + right) / 2];
-    do
+    int left = start;
+    int right = end;
+    int pivot = arr[(left + right) / 2];
+    while (left <= right)
     {
-        while(arr[left] < middle)
+        while(arr[left] < pivot)
         {
             left++;
         }
-        while(arr[right] > middle)
+        while(arr[right] > pivot)
         {
             right--;
         }
@@ -27,10 +27,10 @@ void quickSort(int *arr, int first, int last)
             left++;
             right--;
         }
-    } while(left < right);
+    }
 
-    quickSort(arr, first, right);
-    quickSort(arr, left, last);
+    quickSort(arr, start, right);
+    quickSort(arr, left, end);
     
 }
 
