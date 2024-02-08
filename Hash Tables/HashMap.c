@@ -19,6 +19,7 @@ void init(Hashmap*);
 int getHash(Hashmap*,char*);
 void resize(Hashmap*);
 void add(Hashmap*,char*,int);
+void delete(Hashmap*,char*);
 int get(Hashmap*,char*);
 
 int main()
@@ -28,6 +29,7 @@ int main()
     add(&hashmap, "ten", 10);
     add(&hashmap, "eleven", 11);
     add(&hashmap, "twelve", 12);
+    delete(&hashmap, "twelve");
     printf("%d\n%d\n%d", get(&hashmap, "ten"), get(&hashmap, "eleven"), get(&hashmap, "twelve"));
 }
 
@@ -93,6 +95,23 @@ void add(Hashmap* this, char* _key, int _value)
     this->elements[hash].key = _key;
     this->elements[hash].value = _value;
     this->count++;
+}
+
+void delete(Hashmap* this, char* _key)
+{
+    int hash = getHash(this, _key);
+    if (this->elements[hash].key == _key) 
+    {
+        this->elements[hash].key = NULL;
+    } else {
+        for (int i = hash + 1; i < hash + this->capacity; i++)
+        {
+            if (this->elements[i % this->capacity].key == _key)
+            {
+                this->elements[i % this->capacity].key = NULL;
+            }
+        }   
+    }
 }
 
 int get(Hashmap* this, char* _key)
