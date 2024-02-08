@@ -26,7 +26,7 @@ node_t* init_node(void)
     return ptr;
 }
 
-void push_back(queue* q, int data) 
+void enqueue(queue* q, int data) 
 {
     if (q->head == NULL && q->tail == NULL) {
         q->head = init_node();
@@ -39,7 +39,7 @@ void push_back(queue* q, int data)
     }
 }
 
-void pop_front(queue* q) 
+void dequeue(queue* q) 
 {
     if (q->head == NULL) {
         printf("Queue is empty\n");
@@ -51,7 +51,7 @@ void pop_front(queue* q)
     }
 }
 
-void print_queue(queue* q) 
+void lookup(queue* q) 
 {   
     if (q->head == NULL) {
         printf("Queue is empty\n");
@@ -64,6 +64,15 @@ void print_queue(queue* q)
     }
 }
 
+int peek(queue* q)
+{   
+    if (q->head == NULL) {
+        printf("Queue is empty\n");
+        return -1;
+    }
+    return q->head->data;
+}
+
 int main(void) 
 {
     queue QUEUE;
@@ -72,16 +81,22 @@ int main(void)
     init_queue(&QUEUE);
     while(1) 
     {
-        printf("\nPrint 1 to push, 2 to pop, 3 to print the whole queue, 4 to exit\n");
+        printf("\nPrint 1 to enqueue, 2 to dequeue, 3 to print the whole queue, 4 to peek, 5 to exit\n");
         scanf("%d", &query);
         if (query == 1) {
-            printf("to push: ");
+            printf("to enqueue: ");
             scanf("%d", &n);
-            push_back(&QUEUE, n);
+            enqueue(&QUEUE, n);
         } else if (query == 2) {
-            pop_front(&QUEUE);
+            dequeue(&QUEUE);
         } else if (query == 3) {
-            print_queue(&QUEUE);
+            lookup(&QUEUE);
+        } else if (query == 4) {
+            int n = peek(&QUEUE);
+            if (n != -1)
+            {
+                printf("First element: %d", n);
+            }
         } else {
             break;
         }
